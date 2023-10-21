@@ -1,9 +1,10 @@
 import './App.scss';
+import CatsList from './components/CatsList/CatsList';
 
 function App() {
     return (
         <div className="App">
-            <h1>Medibank Coding Challenge</h1>
+            <CatsList />
         </div>
     );
 }
