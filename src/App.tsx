@@ -1,5 +1,5 @@
-import './App.scss';
 import CatsList from './components/CatsList/CatsList';
+import './App.scss';
 
 function App() {
     return (
