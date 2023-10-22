@@ -5,13 +5,12 @@ import { axiosGet } from '../../../API/requestSender';
 import { PETS_LIST_ENDPOINT_URL } from '../../../constants/constants';
 
 export const useCatsList = () => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     const [catsWithMaleOwner, setCatsWithMaleOwner] = useState<string[]>([]);
     const [catsWithFemaleOwner, setCatsWithFemaleOwner] = useState<string[]>([]);
 
     const getCatsListData = async () => {
-        setIsLoading(true);
         try {
             const petsListResponse = await axiosGet(PETS_LIST_ENDPOINT_URL);
 

@@ -1,35 +1,50 @@
 import { useCatsList } from './talon/useCatsList';
+import defaultClasses from './CatsList.module.scss';
+import LoadingSkeleton from '../LoadingSkeleton/LoadingSkeleton';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const CatsList = () => {
-    const { isLoading, catsWithMaleOwner, catsWithFemaleOwner } = useCatsList();
+    const { isLoading, catsWithMaleOwner, catsWithFemaleOwner, errorMessage } = useCatsList();
 
     if (isLoading) {
-        return <h1>Loading....</h1>;
+        return (
+            <LoadingSkeleton
+                skeletonQuantity={10}
+                classes={{
+                    loadingSkeletonModifier: defaultClasses.loadingSkeletonModifier
+                }}
+            />
+        );
     }
+
+    if (errorMessage) {
+        return <ErrorMessage message={errorMessage} />;
+    }
+
+    const CatsNameList = ({ catsArray, title }: { catsArray: string[]; title: string }) => (
+        <div className={defaultClasses.listWrapper}>
+            <h2 className={defaultClasses.listTitle}>{title}</h2>
+            {catsArray.length ? (
+                <ul className={defaultClasses.listItemsWrapper}>
+                    {catsArray.map((cat, index) => (
+                        <li
+                            className={defaultClasses.listItem}
+                            key={`${cat}-${title}-owner-${index}`}
+                        >
+                            {cat}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No cats found</p>
+            )}
+        </div>
+    );
 
     return (
         <div>
-            <h1>Cats List</h1>
-            <div>
-                <h2>Male</h2>
-                {catsWithMaleOwner.length ? (
-                    catsWithMaleOwner.map((cat, index) => (
-                        <h3 key={`${cat}-male-owner-${index}`}>{cat}</h3>
-                    ))
-                ) : (
-                    <p>No cats found</p>
-                )}
-            </div>
-            <div>
-                <h2>Female</h2>
-                {catsWithFemaleOwner.length ? (
-                    catsWithFemaleOwner.map((cat, index) => (
-                        <h3 key={`${cat}-female-owner-${index}`}>{cat}</h3>
-                    ))
-                ) : (
-                    <p>No cats found</p>
-                )}
-            </div>
+            <CatsNameList catsArray={catsWithMaleOwner} title={'Male'} />
+            <CatsNameList catsArray={catsWithFemaleOwner} title={'Female'} />
         </div>
     );
 };
