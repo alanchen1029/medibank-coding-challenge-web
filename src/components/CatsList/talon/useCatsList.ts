@@ -1,8 +1,7 @@
-import { sortArrayAlphabetically } from './../../../utils/sortArrayAlphabetically';
 import { useEffect, useState } from 'react';
-import { separateCatsByOwnerGender } from './../../../utils/separateCatsByOwnerGender';
 import { axiosGet } from '../../../API/requestSender';
 import { PETS_LIST_ENDPOINT_URL } from '../../../constants/constants';
+import { separateCatsByOwnerGender, sortArrayAlphabetically } from './../../../utils';
 
 export const useCatsList = () => {
     const [isLoading, setIsLoading] = useState(true);
