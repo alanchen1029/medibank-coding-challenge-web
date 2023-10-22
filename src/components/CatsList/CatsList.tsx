@@ -29,8 +29,7 @@ const CatsList = () => {
                     {catsArray.map((cat, index) => (
                         <li
                             className={defaultClasses.listItem}
-                            key={`${cat}-${title}-owner-${index}`}
-                        >
+                            key={`${cat}-${title}-owner-${index}`}>
                             {cat}
                         </li>
                     ))}
